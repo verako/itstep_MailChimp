@@ -18,3 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/model', 'HomeController@model');
+
+//создаем груповой роут, создаются роуты для каждого метода в subscriberController
+Route::group(['middleware'=>'auth'],function(){
+	Route::resource('subscribers','SubscriberController');
+});

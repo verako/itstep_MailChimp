@@ -26,4 +26,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    //связь один ко многим, у одного юзера много подписчиков
+    public function subscribers(){
+        return $this->hasMany('App\Models\Subscriber');
+    }
 }
