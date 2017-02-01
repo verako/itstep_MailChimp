@@ -14,7 +14,7 @@ class SubscriberController extends Controller
      */
     public function index()
     {
-        //
+         return view('subscribers.subscribers');
     }
 
     /**
@@ -52,7 +52,7 @@ class SubscriberController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**

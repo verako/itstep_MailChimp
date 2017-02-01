@@ -66,6 +66,6 @@ class HomeController extends Controller
        // Subscriber::find(2)->delete();
 
         //выыодим всех подписчиков юзера с ид 1
-        echo "<pre>".print_r(User::find(1)->subscribers()->get()->toArray(),true)."</pre>";
+        echo "<pre>".print_r(User::find(2)->subscribers()->get()->toArray(),true)."</pre>";
     }
 }

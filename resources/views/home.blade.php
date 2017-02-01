@@ -8,7 +8,7 @@
                 <div class="panel-heading">HOME</div>
 
                 <div class="panel-body">
-                   Hello {{ Auth::user()->name }}
+                   Hello {{ Auth::user()->email }}
                 </div>
             </div>
         </div>
