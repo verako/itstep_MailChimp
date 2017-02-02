@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Subscriber as SubscriberModel;//подключаем модель,добавляем ей алиас SubscriberModel
+use App\User;
+use DB;
+
 
 class SubscriberController extends Controller
 {
@@ -14,7 +17,12 @@ class SubscriberController extends Controller
      */
     public function index()
     {
-         return view('subscribers.subscribers');
+        $subscribers= User::find(\Auth::user()->id)->subscribers()->get();
+         //print_r($subscribers);
+         // foreach ($subscribers as $key => $value) {
+         //     echo $subscribers[0]->email;
+         // }
+       return view('subscribers.subscribers',[ 'subscribers'  => $subscribers ]);
     }
 
     /**
@@ -86,7 +94,10 @@ class SubscriberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //удаляем строку
+        Subscriber::find($id)->delete();
+        return redirect('subscribers');
+
     }
 
     protected function validator(array $data){
