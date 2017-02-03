@@ -18,10 +18,7 @@ class SubscriberController extends Controller
     public function index()
     {
         $subscribers= User::find(\Auth::user()->id)->subscribers()->get();
-         //print_r($subscribers);
-         // foreach ($subscribers as $key => $value) {
-         //     echo $subscribers[0]->email;
-         // }
+        
        return view('subscribers.subscribers',[ 'subscribers'  => $subscribers ]);
     }
 
@@ -71,7 +68,8 @@ class SubscriberController extends Controller
      */
     public function edit($id)
     {
-        //
+         $Subscriber=SubscriberModel::find($id)->toArray();
+        return view('subscribers.edit',$Subscriber);
     }
 
     /**
@@ -83,7 +81,14 @@ class SubscriberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+     
+       $request= User::find($id)->subscribers()->get();
+       //return view('subscribers.update',[ 'subscribers'  => $request ]);
+       //обновить запись
+        // $subscriberId=2;
+        // $subscriber=SubscriberModel::find($subscriberId);
+        // $subscriber->email='john_doe+1@mail.com';
+        // $subscriber->save();
     }
 
     /**
@@ -95,8 +100,8 @@ class SubscriberController extends Controller
     public function destroy($id)
     {
         //удаляем строку
-        Subscriber::find($id)->delete();
-        return redirect('subscribers');
+        SubscriberModel::find($id)->delete();
+        return redirect('subscribers/destroy');
 
     }
 

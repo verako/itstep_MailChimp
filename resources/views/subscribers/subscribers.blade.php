@@ -10,7 +10,8 @@
            <div class="panel panel-default">
                <div class="panel-heading">Subscriber</div>
                <div class="panel-body">
-
+               		<h3>Subscriber List</h3>
+					<a href="subscribers/create">Add New</a>
 					<table class="table">
 						<thead>
 					      <tr>
@@ -26,7 +27,21 @@
 					     		<td>{{$subscriber['first_name']}}</td>
 								<td>{{$subscriber['last_name']}}</td>
 								<td>{{$subscriber['email']}}</td>
-								<td><a href="">update</a></td>
+								<td>
+									<form action="{{ url('/subscribers/'.$subscriber['id'].'/edit')}}" method="get">
+	  								<input type="submit" value="Edit">
+	  								{{ csrf_field() }}
+									</form>
+								</td>
+								<td>
+								
+									<form class="form-delete" method="post" action="{{ url('/subscribers/'.$subscriber['id']) }}">
+									{{ method_field('DELETE') }}
+									<input type="submit" value="Delete">
+									{{ csrf_field() }}
+									</form>
+									
+								</td>
 								
 							</tr>
 							@endforeach
