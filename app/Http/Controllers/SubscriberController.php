@@ -40,6 +40,16 @@ class SubscriberController extends Controller
      */
     public function store(Request $request)
     {
+        // echo $request->has('first_name');//проверяет существует ли в реквесте first_name
+        // exit;
+
+        // print_r($request->only(['first_name']));//возвращает first_name
+        // print_r(\Request::only(['first_name']));//можно использовать такую запись
+        // exit;
+
+        // print_r($request->except(['first_name']));//возвращает все кроме first_name
+        // exit;
+
         $this->validator($request->all())->validate();
         SubscriberModel::create([
             'user_id'=>\Auth::user()->id,
@@ -101,7 +111,7 @@ class SubscriberController extends Controller
     {
         //удаляем строку
         SubscriberModel::find($id)->delete();
-        return redirect('subscribers/destroy');
+        return redirect('/subscribers');
 
     }
 

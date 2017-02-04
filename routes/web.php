@@ -24,4 +24,6 @@ Route::get('/model', 'HomeController@model');
 //создаем груповой роут, создаются роуты для каждого метода в subscriberController
 Route::group(['middleware'=>'auth'],function(){
 	Route::resource('subscribers','SubscriberController');
+	Route::resource('lists','ListController');
 });
+
