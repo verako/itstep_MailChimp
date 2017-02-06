@@ -25,8 +25,6 @@ class AddForeignKeyEmailSendSettings extends Migration
      */
     public function down()
     {
-        Schema::table('email_send_settings', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('email_send_settings');
     }
 }

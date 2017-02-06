@@ -26,8 +26,6 @@ class AddForeignKeyListSubscribers extends Migration
      */
     public function down()
     {
-        Schema::table('list_subscribers', function (Blueprint $table) {
-            //
-        });
+         Schema::dropIfExists('list_subscribers');
     }
 }
