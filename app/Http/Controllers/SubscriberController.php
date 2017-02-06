@@ -92,13 +92,13 @@ class SubscriberController extends Controller
     public function update(Request $request, $id)
     {
      
-       $request= User::find($id)->subscribers()->get();
-       //return view('subscribers.update',[ 'subscribers'  => $request ]);
-       //обновить запись
-        // $subscriberId=2;
-        // $subscriber=SubscriberModel::find($subscriberId);
-        // $subscriber->email='john_doe+1@mail.com';
-        // $subscriber->save();
+        $subscriber=SubscriberModel::find($id);
+        $subscriber['first_name']=$request->get('first_name');
+        $subscriber['last_name']=$request->get('last_name');
+        $subscriber['email']=$request->get('email');
+        $subscriber->save();
+        return redirect('/subscribers')->with(['flash_message'=>'Data '.$subscriber->email.' successfully update']);
+       
     }
 
     /**
@@ -110,8 +110,9 @@ class SubscriberController extends Controller
     public function destroy($id)
     {
         //удаляем строку
+        $subscriber=SubscriberModel::find($id);
         SubscriberModel::find($id)->delete();
-        return redirect('/subscribers');
+        return redirect('/subscribers')->with(['flash_message'=>'Subscriber '.$subscriber->first_name.' successfully delete']);
 
     }
 

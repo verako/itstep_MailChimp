@@ -6,8 +6,21 @@
 
 <div class="container">
    <div class="row">
-       <div class="col-md-8 col-md-offset-2">
+   	<div class="col-md-2" >
+   		<ul class="nav">
+   			<li><a href="subscribers">Subscriber List</a></li>
+   			<li><a href="subscribers">Send mail</a></li>
+   			<li><a href="subscribers">Setting</a></li>
+   		</ul>
+ 	</div>
+       <div class="col-md-8 col-md-offset-1">
            <div class="panel panel-default">
+            @if ( \Session::has('flash_message') )
+			   <div class="alert alert-success alert-dismissable">
+			       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			    {{\Session::get('flash_message')}}
+			   </div>
+			@endif
                <div class="panel-heading">Subscriber</div>
                <div class="panel-body">
                		<h3>Subscriber List</h3>

@@ -74,6 +74,6 @@ class HomeController extends Controller
         //восстановить запись
        // Subscriber::onlyTrashed()->find(3)->restore();
         //полностью удалить
-        Subscriber::find(3)->forceDelete();
+        //Subscriber::find(3)->forceDelete();
     }
 }
