@@ -21,7 +21,7 @@
 			    {{\Session::get('flash_message')}}
 			   </div>
 			@endif
-               <div class="panel-heading">Subscriber</div>
+               <div class="panel-heading">{{trans('subscribersindex.subscriber')}}</div>
                <div class="panel-body">
                		<h3>Subscriber List</h3>
 					<a href="subscribers/create">Add New</a>

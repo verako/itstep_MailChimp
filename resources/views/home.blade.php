@@ -3,13 +3,23 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-2" >
+            <ul class="nav">
+                <li><a href="subscribers">{{trans('homeindex.SubscriberList')}}</a></li>
+                <li><a href="subscribers">{{trans('homeindex.SendMail')}}</a></li>
+                <li><a href="subscribers">{{trans('homeindex.Setting')}}</a></li>
+            </ul>
+        </div>
+        <div class="col-md-8 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">HOME</div>
+                <div class="panel-heading">{{trans('homeindex.home')}}</div>
 
                 <div class="panel-body">
-                   Hello {{ Auth::user()->email }}
+                   {{trans('homeindex.hello')}} {{ Auth::user()->email }}
+
+
                 </div>
+               
             </div>
         </div>
     </div>

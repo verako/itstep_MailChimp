@@ -17,13 +17,24 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->middleware('locale');
 
-Route::get('/model', 'HomeController@model');
+//Route::get('/model', 'HomeController@model');
 
 //создаем груповой роут, создаются роуты для каждого метода в subscriberController
 Route::group(['middleware'=>'auth'],function(){
 	Route::resource('subscribers','SubscriberController');
 	Route::resource('lists','ListController');
+	Route::post('language',array(
+	'before'=>'csrf',//проверяем,чтобы небыло перекрестных ссылок
+	'as'=>'language-chooser',
+	'uses'=>'LanguageController@chooser'//контроллер,который обрабатывае
+
+	))->middleware('locale');
+});
+
+Route::group(['middleware'=>'locale'],function(){
+	Route::resource('lists','ListController');
+	Route::resource('subscribers','SubscriberController');
 });
 

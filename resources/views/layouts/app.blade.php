@@ -46,6 +46,7 @@
                         &nbsp;
                     </ul>
 
+
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -53,6 +54,18 @@
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
+                            <li style="padding: 10px">
+                              <form action="{{URL::route('language-chooser')}}" method="post">
+                                  <select name="locale" id="">
+                                    <option value="en">English</option>
+                                    <option value="ru" {{Lang::locale()==="ru"?'selected':""}}>Русский</option>
+                                    <option value="ua" {{Lang::locale()==="ua"?'selected':""}}>Укр</option>
+                                    {{csrf_field()}}
+                                </select>
+                                <input type="submit" value="OK">
+                              </form>
+                               
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -63,7 +76,7 @@
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            {{trans('homeindex.Logout')}}
                                         </a>
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -72,6 +85,7 @@
                                     </li>
                                 </ul>
                             </li>
+                            
                         @endif
                     </ul>
                 </div>
