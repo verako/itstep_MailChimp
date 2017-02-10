@@ -8,9 +8,9 @@
    <div class="row">
    	<div class="col-md-2" >
    		<ul class="nav">
-   			<li><a href="subscribers">Subscriber List</a></li>
-   			<li><a href="subscribers">Send mail</a></li>
-   			<li><a href="subscribers">Setting</a></li>
+   			<li><a href="subscribers">{{trans('homeindex.SubscriberList')}}</a></li>
+                <li><a href="subscribers">{{trans('homeindex.SendMail')}}</a></li>
+                <li><a href="subscribers">{{trans('homeindex.Setting')}}</a></li>
    		</ul>
  	</div>
        <div class="col-md-8 col-md-offset-1">
@@ -23,13 +23,13 @@
 			@endif
                <div class="panel-heading">{{trans('subscribersindex.subscriber')}}</div>
                <div class="panel-body">
-               		<h3>Subscriber List</h3>
-					<a href="subscribers/create">Add New</a>
+               		<h3>{{trans('subscribersindex.SubscriberList')}}</h3>
+					<a href="subscribers/create">{{trans('subscribersindex.addnew')}}</a>
 					<table class="table">
 						<thead>
 					      <tr>
-					        <th>Firstname</th>
-					        <th>Lastname</th>
+					        <th>{{trans('subscribersindex.firstname')}}</th>
+					        <th>{{trans('subscribersindex.lastname')}}</th>
 					        <th>Email</th>
 					      </tr>
 					    </thead>
@@ -42,7 +42,7 @@
 								<td>{{$subscriber['email']}}</td>
 								<td>
 									<form action="{{ url('/subscribers/'.$subscriber['id'].'/edit')}}" method="get">
-	  								<input type="submit" value="Edit">
+	  								<input type="submit" value="{{trans('subscribersindex.edit')}}">
 	  								{{ csrf_field() }}
 									</form>
 								</td>
@@ -50,7 +50,7 @@
 								
 									<form class="form-delete" method="post" action="{{ url('/subscribers/'.$subscriber['id']) }}">
 									{{ method_field('DELETE') }}
-									<input type="submit" value="Delete">
+									<input type="submit" value="{{trans('subscribersindex.delete')}}">
 									{{ csrf_field() }}
 									</form>
 									

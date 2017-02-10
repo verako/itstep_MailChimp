@@ -97,7 +97,7 @@ class SubscriberController extends Controller
         $subscriber['last_name']=$request->get('last_name');
         $subscriber['email']=$request->get('email');
         $subscriber->save();
-        return redirect('/subscribers')->with(['flash_message'=>'Data '.$subscriber->email.' successfully update']);
+        return redirect('/subscribers')->with(['flash_message'=>'{{trans("subscribersindex.data")}} '.$subscriber->email.' successfully update']);
        
     }
 
