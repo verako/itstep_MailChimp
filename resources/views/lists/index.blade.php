@@ -37,6 +37,13 @@
 				   			<div>{{$list->name}}</div>
 				   		</td>
 				   		<td>
+				   			<form action="{{url('/lists',[$list->id,'edit'])}}" method="post">
+								{{ csrf_field() }}
+								{{ method_field('GET') }}
+								<button class="btn btn-success">Update</button>
+				   			</form>
+				   		</td>
+				   		<td>
 				   			<form class="form-delete" method="post" action="{{ url('/lists/'.$list->id) }}">
 					   			{{ csrf_field() }}
 								{{ method_field('DELETE') }}
@@ -48,6 +55,7 @@
 
 				   </tbody>
 			</table>
+			{{$lists->links()}} <!-- paginate -->
 
        </div>
    </div>

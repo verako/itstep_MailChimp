@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ListModel;
 use App\Http\Requests\Lists\Create as CreateRequest;
+use App\User as UserModel;
 
 class ListController extends Controller
 {
@@ -15,7 +16,9 @@ class ListController extends Controller
      */
     public function index()
     {
-        return view('lists.index',['lists'=>ListModel::all()]);//передаем все листы
+        $lists=UserModel::find(\Auth::user()->id)->lists()->paginate(5);//постраничный вывод paginate
+        return view('lists.index',['lists'=>$lists]);
+        //return view('lists.index',['lists'=>ListModel::all()]);//передаем все листы
     }
 
     /**
@@ -25,7 +28,7 @@ class ListController extends Controller
      */
     public function create()
     {
-        return view('lists.create');
+        return view('lists.create',['list'=>new ListModel()]);//добавляем пустую переменнуб list
     }
 
     /**
@@ -63,7 +66,8 @@ class ListController extends Controller
      */
     public function edit($id)
     {
-        //
+        $list=ListModel::findOrFail($id);
+        return view('lists.create',['list'=>$list]);
     }
 
     /**
@@ -73,9 +77,13 @@ class ListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateRequest $request, $id)
     {
-        //
+        $list=ListModel::findOrFail($id);
+        $list->fill($request->only(['name']));
+        $list->save();
+        $up=\Lang::get('subscribersindex.update');
+        return redirect('/lists')->with(['flash_message'=>'List'.$list->name.'successfully '.$up]);
     }
 
     /**
@@ -84,9 +92,9 @@ class ListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ListModel $list)//($id)
     {
-        $list=ListModel::findOrFail($id);
+        //$list=ListModel::findOrFail($id);
         $list->delete();
         //возвращаемся назад с выводом сообщения
         return redirect()->back()->with(['flash_message'=>'List'.$list->name.'successfully deleted']);

@@ -29,8 +29,9 @@ Route::group(['middleware'=>'auth'],function(){
 	'before'=>'csrf',//проверяем,чтобы небыло перекрестных ссылок
 	'as'=>'language-chooser',
 	'uses'=>'LanguageController@chooser'//контроллер,который обрабатывае
-
 	))->middleware('locale');
+	Route::get('/send-email','SendController@form');
+	Route::post('/send-email','SendController@send');
 });
 
 Route::group(['middleware'=>'locale'],function(){

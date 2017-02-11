@@ -14,4 +14,5 @@ return [
 	'editsub'=>'Edit subscriber',
 	'entry'=>'Entry',
 	'cancel'=>'Cancel',
+	'update'=>'Update'
 	];
