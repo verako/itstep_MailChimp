@@ -8,11 +8,19 @@
    <div class="row">
        <div class="col-md-8 col-md-offset-2">
            <div class="panel panel-default">
-               <div class="panel-heading">Subscriber</div>
+               <div class="panel-heading">
+					<div class="row">
+		               <div class="col-md-10">
+		                   {{trans('subscribersindex.subscriber')}}
+		               </div>
+		               <div class="col-md-2">
+		                   <a class="btn btn-default" href="{{url('subscribers/create')}}">{{trans('subscribersindex.add')}}</a>
+		               </div>
+		            </div>
+              </div>
                <div class="panel-body">
                		<h3>{{trans('subscribersindex.editsub')}}</h3>
-					<a href="../create">{{trans('subscribersindex.addnew')}}</a>
-					
+										
 					<form class="form-horizontal" role="form" method="post" action="{{ url('/subscribers/'.$id) }}">
 						<input type="hidden" name="_method" value="put">
 						{{ csrf_field() }}

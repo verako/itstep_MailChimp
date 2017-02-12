@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->middleware('locale');
 Route::group(['middleware'=>'auth'],function(){
 	Route::resource('subscribers','SubscriberController');
 	Route::resource('lists','ListController');
+	//Route::resource('home','HomeController');
 	Route::post('language',array(
 	'before'=>'csrf',//проверяем,чтобы небыло перекрестных ссылок
 	'as'=>'language-chooser',
@@ -35,6 +36,7 @@ Route::group(['middleware'=>'auth'],function(){
 });
 
 Route::group(['middleware'=>'locale'],function(){
+	//Route::resource('home','HomeController');
 	Route::resource('lists','ListController');
 	Route::resource('subscribers','SubscriberController');
 });

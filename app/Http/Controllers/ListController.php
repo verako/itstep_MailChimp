@@ -43,7 +43,9 @@ class ListController extends Controller
             'user_id'=>\Auth::user()->id,
             'name'=>$request->get('name')
         ]);
-        return redirect('/lists')->with(['flash_message'=>'List'.$list->name.'successfully created']);
+        $lis=\Lang::get('listindex.List');
+        $create=\Lang::get('listindex.create');
+        return redirect('/lists')->with(['flash_message'=> $lis.' '.$list->name.' '.$create]);
 
     }
 
@@ -82,8 +84,9 @@ class ListController extends Controller
         $list=ListModel::findOrFail($id);
         $list->fill($request->only(['name']));
         $list->save();
-        $up=\Lang::get('subscribersindex.update');
-        return redirect('/lists')->with(['flash_message'=>'List'.$list->name.'successfully '.$up]);
+        $lis=\Lang::get('listindex.List');
+        $up=\Lang::get('listindex.update');
+        return redirect('/lists')->with(['flash_message'=>$lis.' '.$list->name.' '.$up]);
     }
 
     /**
@@ -97,6 +100,8 @@ class ListController extends Controller
         //$list=ListModel::findOrFail($id);
         $list->delete();
         //возвращаемся назад с выводом сообщения
-        return redirect()->back()->with(['flash_message'=>'List'.$list->name.'successfully deleted']);
+        $lis=\Lang::get('listindex.List');
+        $removed=\Lang::get('listindex.removed');
+        return redirect()->back()->with(['flash_message'=>$lis.' '.$list->name.' '.$removed]);
     }
 }

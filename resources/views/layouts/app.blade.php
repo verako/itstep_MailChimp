@@ -53,6 +53,7 @@
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
+                            
                         @else
                             <li style="padding: 10px">
                               <form action="{{URL::route('language-chooser')}}" method="post">

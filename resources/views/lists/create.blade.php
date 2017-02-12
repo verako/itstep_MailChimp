@@ -12,7 +12,14 @@
 			       {{\Session::get('flash_message')}}
 			   </div>
 			@endif
-               <div class="panel-heading">List Add New</div>
+               <div class="panel-heading">
+                @if($list->exists===true)
+				{{trans('listindex.edit')}}
+				@else
+				{{trans('listindex.Add')}}
+				@endif
+
+               </div>
                <div class="panel-body">
                	@if($list->exists===true)
                		<form class="form-horizontal" role="form" method="post" action="{{url('/lists',$list->id)}}">
@@ -39,9 +46,9 @@
 						<div class=" col-md-8 col-md-offset-8">
 						<button type="submit" class="btn btn-primary">
 						@if($list->exists===true)
-						{{'Update'}}
+						{{trans('listindex.edit')}}
 						@else
-						{{'Add'}}
+						{{trans('listindex.Add')}}
 						@endif
 						</button>
 						</div>

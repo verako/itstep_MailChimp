@@ -14,5 +14,6 @@ return [
 	'editsub'=>'Edit subscriber',
 	'entry'=>'Entry',
 	'cancel'=>'Cancel',
-	'update'=>'Update'
+	'update'=>'successfully update',
+	'removed'=>'removed successfully',
 	];

@@ -17,9 +17,9 @@ class SubscriberController extends Controller
      */
     public function index()
     {
-        $subscribers= User::find(\Auth::user()->id)->subscribers()->get();
+        $subscribers= User::find(\Auth::user()->id)->subscribers()->paginate(5);
         
-       return view('subscribers.subscribers',[ 'subscribers'  => $subscribers ]);
+       return view('subscribers.index',[ 'subscribers'  => $subscribers ]);
     }
 
     /**
@@ -57,6 +57,9 @@ class SubscriberController extends Controller
             'last_name'=>$request->get('last_name'),
             'email'=>$request->get('email')
             ]);
+        // $lis=\Lang::get('listindex.List');
+        // $create=\Lang::get('listindex.create');
+        // return redirect('/lists')->with(['flash_message'=> $lis.' '.$list->name.' '.$create]);
     }
 
     /**
@@ -97,7 +100,9 @@ class SubscriberController extends Controller
         $subscriber['last_name']=$request->get('last_name');
         $subscriber['email']=$request->get('email');
         $subscriber->save();
-        return redirect('/subscribers')->with(['flash_message'=>'{{trans("subscribersindex.data")}} '.$subscriber->email.' successfully update']);
+        $dat=\Lang::get('subscribersindex.data');
+        $up=\Lang::get('subscribersindex.update');
+        return redirect('/subscribers')->with(['flash_message'=>$dat.' '.$subscriber->email.' '.$up]);
        
     }
 
@@ -112,7 +117,9 @@ class SubscriberController extends Controller
         //удаляем строку
         $subscriber=SubscriberModel::find($id);
         SubscriberModel::find($id)->delete();
-        return redirect('/subscribers')->with(['flash_message'=>'Subscriber '.$subscriber->first_name.' successfully delete']);
+        $dat=\Lang::get('subscribersindex.data');
+        $removed=\Lang::get('subscribersindex.removed');
+        return redirect('/subscribers')->with(['flash_message'=>$dat.' '.$subscriber->first_name.' '.$removed]);
 
     }
 

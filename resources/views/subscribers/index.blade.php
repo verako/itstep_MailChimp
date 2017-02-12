@@ -11,6 +11,7 @@
    			<li><a href="subscribers">{{trans('homeindex.SubscriberList')}}</a></li>
                 <li><a href="subscribers">{{trans('homeindex.SendMail')}}</a></li>
                 <li><a href="subscribers">{{trans('homeindex.Setting')}}</a></li>
+                <li><a href="lists">{{trans('homeindex.Lists')}}</a></li>
    		</ul>
  	</div>
        <div class="col-md-8 col-md-offset-1">
@@ -21,10 +22,20 @@
 			    {{\Session::get('flash_message')}}
 			   </div>
 			@endif
-               <div class="panel-heading">{{trans('subscribersindex.subscriber')}}</div>
+			 <div class="panel-heading">
+		           <div class="row">
+		               <div class="col-md-10">
+		                   {{trans('subscribersindex.subscriber')}}
+		               </div>
+		               <div class="col-md-2">
+		                   <a class="btn btn-default" href="{{url('subscribers/create')}}">{{trans('subscribersindex.add')}}</a>
+		               </div>
+		           </div>
+		       </div>
+              
                <div class="panel-body">
                		<h3>{{trans('subscribersindex.SubscriberList')}}</h3>
-					<a href="subscribers/create">{{trans('subscribersindex.addnew')}}</a>
+					
 					<table class="table">
 						<thead>
 					      <tr>
@@ -63,7 +74,7 @@
 					      
 					    </tbody>
 					</table>
-                  
+                  {{$subscribers->links()}} <!-- paginate -->
                </div>
            </div>
        </div>

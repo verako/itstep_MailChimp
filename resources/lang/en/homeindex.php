@@ -6,4 +6,5 @@ return [
 'SendMail'=>'Send mail',
 'Setting'=>'Setting',
 'Logout'=>'Logout',
+'Lists'=>'Lists',
 ];
