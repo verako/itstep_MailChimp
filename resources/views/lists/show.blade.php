@@ -6,10 +6,10 @@
 	   	<div class="col-md-2" >
 	   	<!-- @yield('nav') -->
 	   		<ul class="nav">
-	   			<li><a href="subscribers">{{trans('homeindex.SubscriberList')}}</a></li>
-	            <li><a href="send-email">{{trans('homeindex.SendMail')}}</a></li>
-	            <li><a href="settings">{{trans('homeindex.Setting')}}</a></li>
-	            <li><a href="lists">{{trans('homeindex.Lists')}}</a></li>
+	   			<li><a href="../subscribers">{{trans('homeindex.SubscriberList')}}</a></li>
+	            <li><a href="../send-email">{{trans('homeindex.SendMail')}}</a></li>
+	            <li><a href="../settings">{{trans('homeindex.Setting')}}</a></li>
+	            <li><a href="../lists">{{trans('homeindex.Lists')}}</a></li>
 	   		</ul>
 	 	</div>
 	   <div class="col-md-8 col-md-offset-1">
@@ -35,30 +35,20 @@
 
 						   <!-- Table Headings -->
 				   <thead>
-				   <th>{{trans('listindex.name')}}</th>
+				   <th>{{trans('listindex.subscribers')}}</th>
 						<th></th>
 						<th></th>
 						   </thead>
-
-						   <!-- Table Body -->
-						   <tbody>
-						   @foreach($lists as $list)
+						    @foreach($list_subscribers as $sublist)
 						   	<tr>
 						   		<td class="table-text">
-						   			<div>{{$list->name}}</div>
+						   			<div>{{$sublist->email}}</div>
 						   		</td>
 						   		<td>
-						   			<form action="{{url('/lists',[$list->id,'edit'])}}" method="post">
+						   			<form action="{{url('/lists/addsubscriber')}}" method="post">
 										{{ csrf_field() }}
 										{{ method_field('GET') }}
 										<button class="btn btn-success">{{trans('listindex.edit')}}</button>
-						   			</form>
-						   		</td>
-						   		<td>
-						   			<form action="{{url('/lists',[$list->id])}}" method="post">
-										{{ csrf_field() }}
-										{{ method_field('GET') }}
-										<button class="btn btn-success">{{trans('listindex.show')}}</button>
 						   			</form>
 						   		</td>
 						   		<td>
@@ -71,10 +61,13 @@
 						   	</tr>
 						   	@endforeach
 
+						   <!-- Table Body -->
+						   <tbody>
+						   
+
 						   </tbody>
 					</table>
-					{{$lists->links()}} <!-- paginate -->
-
+					
 		       </div>
 		   </div>
 	   </div>

@@ -7,6 +7,9 @@ use App\Mail\Test as TestMail;
 
 class SendController extends Controller
 {
+    // public function index(){
+    //     return view('send.index');
+    // }
     public function form(){
     	return view('send.form');
     }

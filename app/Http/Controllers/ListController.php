@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ListModel;
 use App\Http\Requests\Lists\Create as CreateRequest;
 use App\User as UserModel;
+use App\Models\Subscriber as SubscriberModel;
 
 class ListController extends Controller
 {
@@ -57,7 +58,15 @@ class ListController extends Controller
      */
     public function show($id)
     {
-        //
+        $list=ListModel::findOrFail($id);
+        $subscribers=SubscriberModel::find(\Auth::user()->id);//->paginate(5);
+        $list_subscribers=$list->subscribers()->get();
+       
+        //return view('lists.show',['list'=>$list]);
+              
+        return view('lists.show',['subscribers'=>$subscribers,'list'=>$list,'list_subscribers'=>$list_subscribers]);
+        // // $lists=UserModel::find(\Auth::user()->id)->lists()->paginate(5);//постраничный вывод paginate
+        // // return view('lists.show',['lists'=>$lists]);
     }
 
     /**

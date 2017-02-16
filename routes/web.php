@@ -33,11 +33,14 @@ Route::group(['middleware'=>'auth'],function(){
 	))->middleware('locale');
 	Route::get('/send-email','SendController@form');
 	Route::post('/send-email','SendController@send');
+	Route::get('/settings', 'SettingsController@index');
 });
 
 Route::group(['middleware'=>'locale'],function(){
 	//Route::resource('home','HomeController');
 	Route::resource('lists','ListController');
 	Route::resource('subscribers','SubscriberController');
+	Route::resource('settings', 'SettingsController');
+	//Route::resource('send-email','SendController');
 });
 

@@ -13,11 +13,18 @@
         </div>
         <div class="col-md-8 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">{{trans('homeindex.home')}}</div>
+                <div class="panel-heading">{{trans('settingsindex.settings')}}</div>
 
                 <div class="panel-body">
-                   {{trans('homeindex.hello')}} {{ Auth::user()->email }}
-
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings') }}">
+                        <select name="setting">
+                            <option value="PHP">PHP</option>
+                            <option value="SMPT">SMPT</option>
+                            <option value="Mandrill">Mandrill</option>
+                        </select>
+                        <input type="submit" value="OK">
+                    </form>
+                   
 
                 </div>
                

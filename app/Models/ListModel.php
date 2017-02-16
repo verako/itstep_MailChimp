@@ -15,5 +15,9 @@ class ListModel extends Model
     //какие поля использовать
     protected $fillable=['user_id','name'];
 
+    public function subscribers(){
+		return $this->belongsToMany('app\Models\Subscriber','list_subscribers','list_id','subscriber_id');
+	}
+
 
 }

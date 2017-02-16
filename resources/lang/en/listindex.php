@@ -9,4 +9,6 @@ return [
     'update'=>'successfully update',
 	'removed'=>'removed successfully',
 	'create'=>'successfully created',
+	'subscribers'=>'Subscribers',
+	'show'=>'Show',
 	];
