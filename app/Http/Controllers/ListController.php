@@ -61,10 +61,12 @@ class ListController extends Controller
         $list=ListModel::findOrFail($id);
         $subscribers=SubscriberModel::find(\Auth::user()->id);//->paginate(5);
         $list_subscribers=$list->subscribers()->get();
+        $subscriberss= UserModel::find(\Auth::user()->id)->subscribers()->paginate(5);
+       
        
         //return view('lists.show',['list'=>$list]);
               
-        return view('lists.show',['subscribers'=>$subscribers,'list'=>$list,'list_subscribers'=>$list_subscribers]);
+        return view('lists.show',['subscribers'=>$subscribers,'list'=>$list,'list_subscribers'=>$list_subscribers,'subscriberss'=>$subscriberss]);
         // // $lists=UserModel::find(\Auth::user()->id)->lists()->paginate(5);//постраничный вывод paginate
         // // return view('lists.show',['lists'=>$lists]);
     }
@@ -112,5 +114,24 @@ class ListController extends Controller
         $lis=\Lang::get('listindex.List');
         $removed=\Lang::get('listindex.removed');
         return redirect()->back()->with(['flash_message'=>$lis.' '.$list->name.' '.$removed]);
+    }
+    public function delsubscriber(Request $request)
+    {
+        
+        // //возвращаемся назад с выводом сообщения
+        // $lis=\Lang::get('listindex.List');
+        // $removed=\Lang::get('listindex.removed');
+        // return redirect()->back()->with(['flash_message'=>$lis.' '.$list->name.' '.$removed]);
+
+        $list=ListModel::findOrFail($request->list_id);
+        $list->subscribers()->detach($request->subscriber_id);
+        return redirect()->back();   
+    }
+     public function addsubscriber(Request $request){
+        $subscriber=SubscriberModel::findOrFail($request->subscriber_id);
+        $list=ListModel::findOrFail($request->list_id);
+        if (null ==($list->subscribers()->find($request->subscriber_id)))
+            $list->subscribers()->attach($request->subscriber_id);
+        return redirect()->back();
     }
 }

@@ -25,52 +25,76 @@
 		               <div class="col-md-10">
 		                   {{trans('listindex.Lists')}}
 		               </div>
-		               <div class="col-md-2">
-		                   <a class="btn btn-default" href="{{url('/lists/create')}}">{{trans('listindex.Add')}}</a>
-		               </div>
+		               
 		           </div>
 		       </div>
 		       <div class="panel-body">
 				   <table class="table table-striped task-table">
 
 						   <!-- Table Headings -->
-				   <thead>
-				   <th>{{trans('listindex.subscribers')}}</th>
-						<th></th>
-						<th></th>
-						   </thead>
+					   <thead>
+					   		<th>{{trans('listindex.subscribers')}}</th>
+							<th></th>
+						</thead>
+						<tbody>
 						    @foreach($list_subscribers as $sublist)
 						   	<tr>
 						   		<td class="table-text">
 						   			<div>{{$sublist->email}}</div>
 						   		</td>
+						   		
 						   		<td>
-						   			<form action="{{url('/lists/addsubscriber')}}" method="post">
-										{{ csrf_field() }}
-										{{ method_field('GET') }}
-										<button class="btn btn-success">{{trans('listindex.edit')}}</button>
-						   			</form>
-						   		</td>
-						   		<td>
-						   			<form class="form-delete" method="post" action="{{ url('/lists/'.$list->id) }}">
+						   			<form class="form-delete" method="post" action="{{ url('/lists/delsubscriber') }}">
 							   			{{ csrf_field() }}
-										{{ method_field('DELETE') }}
-										<input type="submit" value="{{trans('listindex.delete')}}">
+										
+										<input type="hidden" name="subscriber_id" value="{{$sublist->id}}">
+										<input type="hidden" name="list_id" value="{{$list->id}}">
+										<!-- <input type="submit" value="{{trans('listindex.delete')}}"> -->
+										<button class="btn btn-success">{{trans('listindex.delete')}}</button>
+										
 									</form>
 						   		</td>
 						   	</tr>
 						   	@endforeach
 
 						   <!-- Table Body -->
-						   <tbody>
+						   
 						   
 
-						   </tbody>
+						</tbody>
 					</table>
 					
 		       </div>
 		   </div>
 	   </div>
+	</div>
+	<div class="row">
+		<div class="panel-body">
+			<table class="table table-striped task-table">
+				<thead>
+					<th>{{trans('listindex.addsubscribers')}}</th>
+					<th></th>
+				</thead>
+				<tbody>
+				@foreach($subscriberss as $subscr)
+					<tr>
+						<td class="table-text">
+							<div>{{$subscr->email}}</div>
+						</td>
+						<td>
+				   			<form class="form-delete" method="post" action="{{ url('/lists/addsubscriber') }}">
+							   	{{ csrf_field() }}
+								<input type="hidden" name="subscriber_id" value="{{$subscr->id}}">
+								<input type="hidden" name="list_id" value="{{$list->id}}">
+								<!-- <input type="submit" value="{{trans('listindex.delete')}}"> -->
+								<button class="btn btn-success">{{trans('listindex.Add')}}</button>
+							</form>
+						</td>
+					</tr>
+				@endforeach
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
 @endsection

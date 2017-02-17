@@ -33,6 +33,8 @@ Route::group(['middleware'=>'auth'],function(){
 	))->middleware('locale');
 	Route::get('/send-email','SendController@form');
 	Route::post('/send-email','SendController@send');
+	Route::post('/lists/addsubscriber','ListController@addsubscriber');
+	Route::post('/lists/delsubscriber','ListController@delsubscriber');
 	Route::get('/settings', 'SettingsController@index');
 });
 
