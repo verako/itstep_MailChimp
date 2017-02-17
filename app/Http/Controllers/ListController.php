@@ -134,4 +134,18 @@ class ListController extends Controller
             $list->subscribers()->attach($request->subscriber_id);
         return redirect()->back();
     }
+
+     /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'subscriber_id' => 'required|unique:list_subscribers',
+            
+        ]);
+    }
 }
