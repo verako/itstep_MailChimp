@@ -24,7 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
+        //для выполнения команд на сервере
+        //запуск очереди
+        $schedule->command('queue:work')->everyMinute()->withoutOverlapping();
+        //запуск миграции
+        $schedule->command('migrate')->everyFiveMinutes()->withoutOverlapping();
         //          ->hourly();
     }
 
