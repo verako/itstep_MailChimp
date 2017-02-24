@@ -14,12 +14,22 @@
 		                   {{trans('subscribersindex.subscriber')}}
 		               </div>
 		               <div class="col-md-2">
+		              
 		                   <a class="btn btn-default" href="{{url('subscribers/create')}}">{{trans('subscribersindex.add')}}</a>
 		               </div>
 		            </div>
               </div>
-               <div class="panel-body">
-               		<h3>{{trans('subscribersindex.editsub')}}</h3>
+              <div class="panel-heading">
+		                @if($subscriber->exists===true)
+						{{trans('subscribersindex.editsub')}}
+						@else
+						{{trans('subscribersindex.add')}}
+						@endif
+	       
+		       </div>
+               <div class="panel-body"> 
+               		
+               		<!-- <h3>{{trans('subscribersindex.')}}</h3> -->
 										
 					<form class="form-horizontal" role="form" method="post" action="{{ url('/subscribers/'.$id) }}">
 						<input type="hidden" name="_method" value="put">

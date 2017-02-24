@@ -11,4 +11,5 @@ return [
 	'create'=>'успiшно створено',
 	'subscribers'=>'Підписанi адресати',
 	'show'=>'Перегляд',
+	'addsubscribers'=>'Додати адресатів',
 	];

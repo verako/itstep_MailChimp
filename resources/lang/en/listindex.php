@@ -11,4 +11,5 @@ return [
 	'create'=>'successfully created',
 	'subscribers'=>'Subscribers',
 	'show'=>'Show',
+	'addsubscribers'=>'Add subscribers',
 	];

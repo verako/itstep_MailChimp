@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Lists\Create as CreateRequest;
 use App\Models\Subscriber as SubscriberModel;//подключаем модель,добавляем ей алиас SubscriberModel
-use App\User;
+use App\User as UserModel;
 use DB;
 
 
@@ -17,7 +18,7 @@ class SubscriberController extends Controller
      */
     public function index()
     {
-        $subscribers= User::find(\Auth::user()->id)->subscribers()->paginate(5);
+        $subscribers= UserModel::find(\Auth::user()->id)->subscribers()->paginate(5);
         
        return view('subscribers.index',[ 'subscribers'  => $subscribers ]);
     }
@@ -29,7 +30,7 @@ class SubscriberController extends Controller
      */
     public function create()
     {
-       return view('subscribers.create');
+       return view('subscribers.create',['subscriber'=>new SubscriberModel()]);
     }
 
     /**
@@ -51,7 +52,7 @@ class SubscriberController extends Controller
         // exit;
 
         $this->validator($request->all())->validate();
-        SubscriberModel::create([
+        $subscriber=SubscriberModel::create([
             'user_id'=>\Auth::user()->id,
             'first_name'=>$request->get('first_name'),
             'last_name'=>$request->get('last_name'),
@@ -81,8 +82,9 @@ class SubscriberController extends Controller
      */
     public function edit($id)
     {
-         $Subscriber=SubscriberModel::find($id)->toArray();
-        return view('subscribers.edit',$Subscriber);
+        
+        $subscriber=SubscriberModel::findOrFail($id);//find($id)->toArray();
+        return view('subscribers.create',['subscriber'=>$subscriber]);
     }
 
     /**
@@ -95,7 +97,7 @@ class SubscriberController extends Controller
     public function update(Request $request, $id)
     {
      
-        $subscriber=SubscriberModel::find($id);
+        $subscriber=SubscriberModel::findOrFail($id);
         $subscriber['first_name']=$request->get('first_name');
         $subscriber['last_name']=$request->get('last_name');
         $subscriber['email']=$request->get('email');
@@ -127,7 +129,7 @@ class SubscriberController extends Controller
         return \Validator::make($data,[
             'first_name'=>'required|max:128|min:2',
             'last_name'=>'required|max:128|min:2',
-            'email'=>'required|email|max:256'
+            'email'=>'required|email|max:256|unique:subscribers'
             ]);
     }
 }

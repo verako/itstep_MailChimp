@@ -52,9 +52,11 @@
 								<td>{{$subscriber['last_name']}}</td>
 								<td>{{$subscriber['email']}}</td>
 								<td>
-									<form action="{{ url('/subscribers/'.$subscriber['id'].'/edit')}}" method="get">
-	  								<input type="submit" value="{{trans('subscribersindex.edit')}}">
+									<form action="{{ url('/subscribers',[$subscriber->id,'edit'])}}" method="post">
 	  								{{ csrf_field() }}
+	  								{{ method_field('GET') }}
+	  								<input type="submit" value="{{trans('subscribersindex.edit')}}">
+	  								
 									</form>
 								</td>
 								<td>

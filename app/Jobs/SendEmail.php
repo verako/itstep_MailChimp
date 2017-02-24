@@ -52,13 +52,12 @@ class SendEmail implements ShouldQueue
     }
 
     private function getMailDriver(){
-        return 'log';
-        /*$typeId=EmailSendSettingModel::where('user_id', $this->userId)->value('type_send_id');
+        $typeId=EmailSendSettingModel::where('user_id', $this->userId)->value('type_send_id');
         if(!empty($typeId)){
-            return EmailSendSettingModel::find($typeId)->type;
+            return EmailSendTypeModel::find($typeId)->type;
         }
         else{
-            return EmailSendSettingModel::first()->type;
-        }*/
+            return EmailSendTypeModel::first()->type;
+        }
     }
 }

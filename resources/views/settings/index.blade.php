@@ -17,10 +17,12 @@
 
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings') }}">
+                    {{csrf_field()}}
                         <select name="setting">
-                            <option value="PHP">PHP</option>
-                            <option value="SMPT">SMPT</option>
-                            <option value="Mandrill">Mandrill</option>
+                        @foreach($types as $type) 
+                            <option value="{{$type->id}}">{{$type->type}}</option>
+                           
+                        @endforeach
                         </select>
                         <input type="submit" value="OK">
                     </form>
